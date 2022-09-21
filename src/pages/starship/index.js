@@ -1,6 +1,7 @@
 import React, { useMemo, useState, useEffect } from "react";
 import axios from "axios";
 import Table from "../../components/Table";
+import { Link } from "react-router-dom";
 import Text from "../../components/Typography/Typography";
 
 export default function StarShip() {
@@ -13,7 +14,6 @@ export default function StarShip() {
       .get(baseUrl)
       .then((response) => {
         setStarShip(response.data?.results);
-        console.log("ships", response.data?.results);
         setIsloading(false);
       })
       .catch((error) => {
