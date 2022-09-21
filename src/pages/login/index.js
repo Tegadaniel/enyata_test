@@ -34,6 +34,7 @@ export default function Login() {
         autoClose: 2000,
         closeOnClick: true,
       });
+      navigate("/dashboard");
     },
   });
   return (
@@ -153,9 +154,16 @@ export default function Login() {
                       alignItems="center"
                     >
                       <div className="flex flex-row gap-1">
-                        <p className="text-sm text-[#303B54] font-normal underline">Privacy Policy</p>
-                        <p className="text-sm text-[#A4A7B74D] font-light"> and</p>
-                        <p className="text-sm text-[#303B54] font-normal underline">Terms of services</p>
+                        <p className="text-sm text-[#303B54] font-normal underline">
+                          Privacy Policy
+                        </p>
+                        <p className="text-sm text-[#A4A7B74D] font-light">
+                          {" "}
+                          and
+                        </p>
+                        <p className="text-sm text-[#303B54] font-normal underline">
+                          Terms of services
+                        </p>
                       </div>
                     </Grid>
                   </div>
