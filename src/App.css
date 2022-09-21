@@ -1,0 +1,26 @@
+.in-between {
+    display: flex;
+    flex-direction: row;
+  }
+  .in-between:before,
+  .in-between:after {
+    content: "";
+    flex: 1 1;
+    border-bottom: 1px solid;
+    margin: auto;
+  }
+  .in-between:before {
+    margin-right: 10px;
+    color: black;
+  }
+  .in-between:after {
+    margin-left: 10px;
+    color: black;
+  }
+  
+  .table-style {
+    background: #fbfbfb;
+  }
+  .table-style:nth-of-type(even) {
+    background: #ffffff;
+  }

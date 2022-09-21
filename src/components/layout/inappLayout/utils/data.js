@@ -13,18 +13,18 @@ export const navLinks = [
     id: 2,
     name: "Starship",
     icon: starship,
-    link: "starship",
+    link: "/starship",
   },
   {
     id: 3,
     name: "People",
     icon: people,
-    link: "people",
+    link: "/people",
   },
   {
     id: 4,
     name: "Species",
     icon: species,
-    link: "species",
+    link: "/species",
   },
 ];

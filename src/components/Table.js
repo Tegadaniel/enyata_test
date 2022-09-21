@@ -7,30 +7,26 @@ import {
 } from "react-table";
 
 import Menu from "@mui/material/Menu";
-
 import { List, ListItem, IconButton } from "@material-ui/core";
 import { Close } from "@material-ui/icons";
-import emptyIllustration from "../assets/images/emptyIllustration.svg";
-import search from "../assets/images/search.svg";
-import filter from "../assets/images/Filter.svg";
+import emptyIllustration from "../assets/emptyIllustration.svg";
+import search from "../assets/search.svg";
 import PaginationControlled from "./forms/pagination";
 import Text from "./Typography/Typography";
-
-import ButtonDropdown from "../components/ButtonDropdown";
+import Button from "./Button";
 
 const Table = ({
   columns: userColumns,
   data,
   totalNumberOfPages,
   page,
-  FormElement,
-  formProps,
+  formElement,
   handlePaginationChange,
   children,
   placeholder,
   isLoading,
   errorMessage,
-  showChecked,
+  showChecked = false,
   ifExport = false,
   ifFilter = true,
   exportFunction,
@@ -40,9 +36,9 @@ const Table = ({
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+  // const handleClick = (event) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -117,16 +113,16 @@ const Table = ({
       // </div>;
     } else if (errorMessage) {
       return (
-        <div className="w-full flex justify-center">
-          {/* <Text variant="h3" color="font-bold not-italic">
+        <div className="w-full flex flex-column justify-center items-center h-52">
+          <Text variant="h1" color="font-bold not-italic">
             {errorMessage}
-          </Text> */}
+          </Text>
         </div>
       );
     } else {
       return (
         <>
-          <tbody className="w-full " {...getTableBodyProps()}>
+          <tbody className="w-full" {...getTableBodyProps()}>
             {rows.map((row, i) => {
               prepareRow(row);
               return (
@@ -164,7 +160,7 @@ const Table = ({
       <div className="w-full px-2 pb-6">{children}</div>
       {!removePaginationAndFiltering && (
         <div className="flex items-center w-full mt-2">
-          <div className="" style={{ width: "95%" }}>
+          <div className="" style={{ width: "100%" }}>
             <span className="px-2 font-normal focus:outline-none relative ml-1">
               <img
                 src={search}
@@ -176,9 +172,9 @@ const Table = ({
                 onKeyDown={(e) => handleSearch(e)}
                 placeholder={placeholder}
                 className="text-TITLE text-xs outline-none bg-NEUTRAL-_100 rounded-md pl-10 p-3"
-                style={{ width: "100%" }}
+                style={{ width: "95%" }}
               />
-              <img
+              {/* <img
                 src={filter}
                 alt="filter"
                 onClick={handleClick}
@@ -190,7 +186,7 @@ const Table = ({
                 format="absolute right-3 top-1 w-4 h-4 mr-2 cursor-pointer"
               >
                 Filter
-              </Text>
+              </Text> */}
             </span>
           </div>
           {ifFilter && (
@@ -213,8 +209,8 @@ const Table = ({
                 },
               }}
             >
-              <div className="flex justify-between mx-6">
-                <Text variant="h3" format="mr-4 mt-2 font-bold">
+              <div className="flex justify-between">
+                <Text variant="h3" format="ml-4 mt-2 font-bold">
                   Filter
                 </Text>
                 <IconButton onClick={handleClose}>
@@ -222,13 +218,23 @@ const Table = ({
                 </IconButton>
               </div>
               <List>
-                <ListItem className="mb-2 p-3">
-                  {FormElement && <FormElement {...formProps} handleClose={handleClose} />}
-                </ListItem>
+                <ListItem className="mb-2 p-3">{formElement}</ListItem>
               </List>
             </Menu>
           )}
-          {/* <div className={`${!ifExport ? "hidden" : ""}`}>{ifExport && <ButtonDropdown />}</div> */}
+          <div>
+            {ifExport && (
+              <Button
+                isExport={true}
+                title="Export"
+                className="p-6 h-10"
+                backgroundColor="#fff"
+                textColor="#000000"
+                onClick={exportFunction}
+                style={{ border: "1px solid #A0B1C0" }}
+              />
+            )}
+          </div>
         </div>
       )}
 
@@ -239,7 +245,7 @@ const Table = ({
               {headerGroup.headers.map((column, id) => (
                 <th
                   key={id}
-                  className="p-4 text-left font-bold text-sm text-TITLE uppercase"
+                  className="p-4 text-left font-normal text-sm text-[#A4A7B7] uppercase"
                   {...column.getHeaderProps()}
                 >
                   {column.render("Header")}
@@ -273,14 +279,6 @@ const Table = ({
           </div>
         </div>
       )}
-      {data.length < 1 && !isLoading && (
-        <div className="w-full flex justify-center mt-4">
-          <Text variant="h3" color="text-RED-_500 font-bold not-italic">
-            {errorMessage}
-          </Text>
-        </div>
-      )}
-
       {data.length < 1 && !isLoading && (
         <div className="flex flex-col items-center">
           <img src={emptyIllustration} alt="empty" className="w-40 h-40" />
