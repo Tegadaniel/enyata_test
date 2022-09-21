@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {},
     boxShadow: {
-      projects: "0px 0px 10px rgba(0, 0, 0, 0.06)",
+      projects: " 0px 4px 4px 0px #00000040",
     },
   },
   plugins: [],

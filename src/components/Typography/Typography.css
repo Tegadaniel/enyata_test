@@ -1,0 +1,81 @@
+.typography--variant-h0 {
+  font-size: 40px;
+  line-height: 64px;
+}
+
+.typography--variant-h1 {
+  font-size: 24px;
+  line-height: 32px;
+}
+
+.typography--variant-h2 {
+  font-size: 20px;
+  line-height: 32px;
+}
+
+.typography--variant-h3 {
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.typography--variant-h4 {
+  font-size: 12px;
+  line-height: 24px;
+}
+
+.typography--variant-body {
+  font-size: 10px;
+  line-height: 20px;
+}
+
+.typography--variant-small {
+  font-size: 8px;
+  line-height: 18px;
+}
+
+.typography--variant-sub {
+  font-size: 7px;
+  line-height: 16px;
+}
+
+@media (min-width: 768px) {
+  .typography--variant-h0 {
+    font-size: 48px;
+    line-height: 64px;
+  }
+
+  .typography--variant-h1 {
+    font-size: 32px;
+    line-height: 32px;
+  }
+
+  .typography--variant-h2 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  .typography--variant-h3 {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .typography--variant-h4 {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .typography--variant-body {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .typography--variant-small {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .typography--variant-sub {
+    font-size: 10px;
+    line-height: 16px;
+  }
+}
