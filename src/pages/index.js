@@ -3,8 +3,13 @@ import axios from "axios";
 import Text from "../components/Typography/Typography";
 import Summary from "./components";
 import Table from "../components/Table";
+import { Link } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { ActiveNavState } from "../atoms/ActiveStateAtom";
 
 export default function Dashboard() {
+  // eslint-disable-next-line
+  const [isTrue, setIsTrue] = useRecoilState(ActiveNavState);
   const [data, setData] = useState([]);
   const [isLoading, setIsloading] = useState(true);
   const [films, setFilms] = useState([]);
@@ -38,6 +43,10 @@ export default function Dashboard() {
       });
   };
 
+  const handleClick = () => {
+    setIsTrue(true);
+  };
+
   useEffect(() => {
     multipleApiCall();
     getFilms();
@@ -56,8 +65,7 @@ export default function Dashboard() {
 
   const latestMovies = films || movies;
 
-
-  const rows = latestMovies?.map((item, i) => {
+  const rows = latestMovies?.map((item, id) => {
     return {
       filmTitle: (
         <p className="font-normal text-sm text-[#303B54] ">{item.title}</p>
@@ -74,11 +82,24 @@ export default function Dashboard() {
         <p className="font-normal text-sm text-[#303B54] ">{item.producer}</p>
       ),
       episodeId: (
-        <p className="font-normal text-sm text-[#303B54] ">{item.episode_id || 5}</p>
+        <p className="font-normal text-sm text-[#303B54] ">
+          {item.episode_id || 5}
+        </p>
       ),
       character: (
-        <p className="font-normal text-sm text-[#303B54] ">{item?.characters[0]}</p>
-      )
+        <Link
+          className="cursor-pointer"
+          to={`/dashboard/overview/${id + 1}`}
+          state={item}
+        >
+          <p
+            onClick={() => handleClick()}
+            className="font-normal text-sm text-[#0048D3] cursor-pointer "
+          >
+            {item?.characters[0]}
+          </p>
+        </Link>
+      ),
     };
   });
 
@@ -136,23 +157,26 @@ export default function Dashboard() {
             <Summary data={data} />
           </div>
 
-          <div className="mt-8 cursor-pointer">
-            <Text variant="h4" format="text-[#A4A7B7] font-normal">
+          <div className="mt-8 ">
+            <Text
+              variant="h4"
+              format="text-[#A4A7B7] font-normal cursor-pointer"
+            >
               Films
             </Text>
 
             {/* <Table dataSource={rows} columns={column} /> */}
 
             {
-            <div className=" border border-[#A4A7B766] border-solid rounded-sm mt-6">
-              <Table
-                columns={columns}
-                data={rows}
-                showChecked={true}
-                className="w-full"
-                // isLoading={isLoading}
-                removePaginationAndFiltering={true}
-              />
+              <div className=" border border-[#A4A7B766] border-solid rounded-sm mt-6">
+                <Table
+                  columns={columns}
+                  data={rows}
+                  showChecked={true}
+                  className="w-full"
+                  // isLoading={isLoading}
+                  removePaginationAndFiltering={true}
+                />
               </div>
             }
           </div>

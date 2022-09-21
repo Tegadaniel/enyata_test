@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-export const ActiveState = atom({
-  key: "activeState",
+export const ActiveNavState = atom({
+  key: "activeNavState",
   default: false,
 });

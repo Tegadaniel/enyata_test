@@ -3,8 +3,13 @@ import axios from "axios";
 import Table from "../../components/Table";
 import Text from "../../components/Typography/Typography";
 import moment from "moment";
+import { Link } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { ActiveNavState } from "../../atoms/ActiveStateAtom";
 
 export default function People() {
+  // eslint-disable-next-line
+  const [isTrue, setIsTrue] = useRecoilState(ActiveNavState);
   const [isLoading, setIsloading] = useState(true);
   const [people, setPeople] = useState([]);
 
@@ -21,14 +26,31 @@ export default function People() {
       });
   };
 
+  const handleClick = () => {
+    setIsTrue(true);
+  };
+
   useEffect(() => {
     getPeople();
     // eslint-disable-next-line
   }, []);
 
-  const rows = people?.map((item, i) => {
+  const rows = people?.map((item, id) => {
     return {
-      name: <p className="font-normal text-sm text-[#303B54] ">{item.name}</p>,
+      name: (
+        <Link
+          className="cursor-pointer"
+          to={`/people/name/${id + 1}`}
+          state={item}
+        >
+          <p
+            onClick={() => handleClick()}
+            className="font-normal text-sm text-[#0048D3] cursor-pointer "
+          >
+            {item.name}
+          </p>
+        </Link>
+      ),
       birth_year: (
         <p className="font-normal text-sm text-[#303B54] ">{item.birth_year}</p>
       ),

@@ -8,6 +8,10 @@ import Dashboard from "../pages";
 import StarShip from "../pages/starship";
 import People from "../pages/people";
 import Species from "../pages/species";
+import SingleOverview from "../pages/components/singleOverview";
+import SingleStarShip from "../pages/starship/components";
+import SinglePerson from "../pages/people/components";
+import SingleSpecies from "../pages/species/components";
 
 function InappPrivateRoute() {
   // const { isLoggedIn, user } = useSelector((state) => state.loginReducer);
@@ -33,6 +37,16 @@ export default function AppRoute() {
             <Route path="/starship" element={<StarShip />} />
             <Route path="/people" element={<People />} />
             <Route path="/species" element={<Species />} />
+            <Route
+              path="/dashboard/overview/:id"
+              element={<SingleOverview />}
+            />
+
+            <Route path="/starship/url/:id" element={<SingleStarShip />} />
+
+            <Route path="/people/name/:id" element={<SinglePerson />} />
+
+            <Route path="/species/name/:id" element={<SingleSpecies />} />
           </Route>
 
           <Route path="/" element={<Login />} />

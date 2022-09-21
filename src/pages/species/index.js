@@ -3,8 +3,13 @@ import axios from "axios";
 import Table from "../../components/Table";
 import Text from "../../components/Typography/Typography";
 import moment from "moment";
+import { Link } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { ActiveNavState } from "../../atoms/ActiveStateAtom";
 
 export default function Species() {
+  // eslint-disable-next-line
+  const [isTrue, setIsTrue] = useRecoilState(ActiveNavState);
   const [isLoading, setIsloading] = useState(true);
   const [species, setSpecies] = useState([]);
 
@@ -21,14 +26,31 @@ export default function Species() {
       });
   };
 
+  const handleClick = () => {
+    setIsTrue(true);
+  };
+
   useEffect(() => {
     getSpecies();
     // eslint-disable-next-line
   }, []);
 
-  const rows = species?.map((item, i) => {
+  const rows = species?.map((item, id) => {
     return {
-      name: <p className="font-normal text-sm text-[#303B54] ">{item.name}</p>,
+      name: (
+        <Link
+          className="cursor-pointer"
+          to={`/species/name/${id + 1}`}
+          state={item}
+        >
+          <p
+            onClick={() => handleClick()}
+            className="font-normal text-sm text-[#0048D3] "
+          >
+            {item.name}
+          </p>
+        </Link>
+      ),
       classification: (
         <p className="font-normal text-sm text-[#303B54] ">
           {item.classification}
@@ -38,7 +60,9 @@ export default function Species() {
         <p className="font-normal text-sm text-[#303B54] ">{item.eye_colors}</p>
       ),
       hair_colors: (
-        <p className="font-normal text-sm text-[#303B54] ">{item.hair_colors}</p>
+        <p className="font-normal text-sm text-[#303B54] ">
+          {item.hair_colors}
+        </p>
       ),
       height: (
         <p className="font-normal text-sm text-[#303B54] ">

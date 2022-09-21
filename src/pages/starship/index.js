@@ -3,8 +3,12 @@ import axios from "axios";
 import Table from "../../components/Table";
 import { Link } from "react-router-dom";
 import Text from "../../components/Typography/Typography";
+import { useRecoilState } from "recoil";
+import { ActiveNavState } from "../../atoms/ActiveStateAtom";
 
 export default function StarShip() {
+  // eslint-disable-next-line
+  const [isTrue, setIsTrue] = useRecoilState(ActiveNavState);
   const [isLoading, setIsloading] = useState(true);
   const [starShip, setStarShip] = useState([]);
 
@@ -21,12 +25,16 @@ export default function StarShip() {
       });
   };
 
+  const handleClick = () => {
+    setIsTrue(true);
+  };
+
   useEffect(() => {
     getStarShip();
     // eslint-disable-next-line
   }, []);
 
-  const rows = starShip?.map((item, i) => {
+  const rows = starShip?.map((item, id) => {
     return {
       name: <p className="font-normal text-sm text-[#303B54] ">{item.name}</p>,
       model: (
@@ -46,7 +54,18 @@ export default function StarShip() {
         </p>
       ),
       character: (
-        <p className="font-normal text-sm text-[#303B54] ">{item?.url}</p>
+        <Link
+          className="cursor-pointer"
+          to={`/starship/url/${id + 1}`}
+          state={item}
+        >
+          <p
+            onClick={() => handleClick()}
+            className="font-normal text-sm text-[#0048D3] "
+          >
+            {item?.url}
+          </p>
+        </Link>
       ),
     };
   });

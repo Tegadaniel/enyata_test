@@ -17,7 +17,7 @@ export default function InAppLayout() {
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ ease: "easeIn", duration: 0.8 }}
-        className="bg-[#FFFFFF] md:p-5 col-start-3 col-end-13 p-3 mt-16"
+        className="bg-[#FFFFFF] md:p-5 xl:col-start-3 xl:col-end-13 p-3 mt-16 col-start-4 col-end-13"
       >
         <Outlet />
       </motion.div>
